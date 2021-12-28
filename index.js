@@ -12,4 +12,15 @@ const playerTwoDice = document.querySelector("#player2Dice");
 const rollButton = document.querySelector("#rollBtn");
 const resetButton = document.querySelector("#resetBtn");
 
-console.log(playerTurnText);
+//random number generator
+rollButton.addEventListener("click", function () {
+  let randNum = Math.floor(Math.random() * 6 + 1);
+  console.log(randNum);
+
+  if (playerOneTurn) {
+    console.log("player one rolled " + randNum);
+  } else {
+    console.log("player two rolled " + randNum);
+  }
+  playerOneTurn = !playerOneTurn;
+});
