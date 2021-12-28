@@ -15,12 +15,18 @@ const resetButton = document.querySelector("#resetBtn");
 //random number generator
 rollButton.addEventListener("click", function () {
   let randNum = Math.floor(Math.random() * 6 + 1);
-  console.log(randNum);
+  //   console.log(randNum);
 
   if (playerOneTurn) {
-    console.log("player one rolled " + randNum);
+    playerOneDice.textContent = randNum + "";
+    playerOneDice.classList.remove("active");
+    playerTwoDice.classList.add("active");
+    playerTurnText.textContent = "Player 2 Turn";
   } else {
-    console.log("player two rolled " + randNum);
+    playerTwoDice.textContent = randNum + "";
+    playerTwoDice.classList.remove("active");
+    playerOneDice.classList.add("active");
+    playerTurnText.textContent = "Player 1 Turn";
   }
   playerOneTurn = !playerOneTurn;
 });
