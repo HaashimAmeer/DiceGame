@@ -18,15 +18,19 @@ rollButton.addEventListener("click", function () {
   //   console.log(randNum);
 
   if (playerOneTurn) {
-    playerOneDice.textContent = randNum + "";
+    playerOneDice.textContent = randNum + ""; //updated dice number
+    playerOneScore += randNum; //adding to running sum
+    playerOneScoreText.textContent = playerOneScore + ""; //updating text of running sum
     playerOneDice.classList.remove("active");
     playerTwoDice.classList.add("active");
     playerTurnText.textContent = "Player 2 Turn";
   } else {
-    playerTwoDice.textContent = randNum + "";
+    playerTwoDice.textContent = randNum + ""; //updated dice number
+    playerTwoScore += randNum; //adding to running sum
+    playerTwoScoreText.textContent = playerTwoScore + ""; //updating text of running sum
     playerTwoDice.classList.remove("active");
     playerOneDice.classList.add("active");
     playerTurnText.textContent = "Player 1 Turn";
   }
-  playerOneTurn = !playerOneTurn;
+  playerOneTurn = !playerOneTurn; //switching player
 });
