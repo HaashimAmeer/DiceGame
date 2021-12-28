@@ -1,14 +1,14 @@
 //game vars
-let playerOneScore = 0;
-let playerTwoScore = 0;
-let playerOneTurn = true;
+let p1_score = 0;
+let p2_score = 0;
+let p1_turn = true;
 
 //DOM vars
-const playerTurnText = document.getElementById("message");
-const playerOneScoreText = document.getElementById("player1Scoreboard");
-const playerOneDice = document.getElementById("player1Dice");
-const playerTwoScoreText = document.getElementById("player2Scoreboard");
-const playerTwoDice = document.getElementById("player2Dice");
+const message = document.getElementById("message");
+const p1_dice = document.getElementById("player1Dice");
+const p2_dice = document.getElementById("player2Dice");
+const p1_scoreboard = document.getElementById("player1Scoreboard");
+const p2_scoreboard = document.getElementById("player2Scoreboard");
 const rollButton = document.getElementById("rollBtn");
 const resetButton = document.getElementById("resetBtn");
 
@@ -16,30 +16,45 @@ const resetButton = document.getElementById("resetBtn");
 rollButton.addEventListener("click", function () {
   let randNum = Math.floor(Math.random() * 6 + 1);
 
-  if (playerOneTurn) {
-    playerOneDice.textContent = randNum + ""; //updated dice number
-    playerOneScore += randNum; //adding to running sum
-    playerOneScoreText.textContent = playerOneScore + ""; //updating text of running sum
-    playerOneDice.classList.remove("active");
-    playerTwoDice.classList.add("active");
-    playerTurnText.textContent = "Player 2 Turn";
+  if (p1_turn) {
+    p1_dice.textContent = randNum + ""; //updated dice number
+    p1_score += randNum; //adding to running sum
+    p1_scoreboard.textContent = p1_score + ""; //updating text of running sum
+    p1_dice.classList.remove("active");
+    p2_dice.classList.add("active");
+    message.textContent = "Player 2 Turn";
   } else {
-    playerTwoDice.textContent = randNum + ""; //updated dice number
-    playerTwoScore += randNum; //adding to running sum
-    playerTwoScoreText.textContent = playerTwoScore + ""; //updating text of running sum
-    playerTwoDice.classList.remove("active");
-    playerOneDice.classList.add("active");
-    playerTurnText.textContent = "Player 1 Turn";
+    p2_dice.textContent = randNum + ""; //updated dice number
+    p2_score += randNum; //adding to running sum
+    p2_scoreboard.textContent = p2_score + ""; //updating text of running sum
+    p2_dice.classList.remove("active");
+    p1_dice.classList.add("active");
+    message.textContent = "Player 1 Turn";
   }
-  playerOneTurn = !playerOneTurn; //switching player
+  p1_turn = !p1_turn; //switching player
 
-  if (playerOneScore > 20 || playerTwoScore > 20) {
-    if (playerOneScore >= 20) {
-      playerTurnText.textContent = "Player 1 has won!";
+  if (p1_score >= 20 || p2_score >= 20) {
+    if (p1_score >= 20) {
+      message.textContent = "Player 1 has won!";
     } else {
-      playerTurnText.textContent = "Player 2 has won!";
+      message.textContent = "Player 2 has won!";
     }
     rollButton.style.display = "none";
     resetButton.style.display = "block";
   }
+});
+
+resetButton.addEventListener("click", function () {
+  p1_score = 0;
+  p2_score = 0;
+  p1_turn = true;
+  message.textContent = "Player 1 Turn";
+  p1_scoreboard.textContent = "0";
+  p2_scoreboard.textContent = "0";
+  p1_dice.textContent = "-";
+  p2_dice.textContent = "-";
+  resetButton.style.display = "none";
+  rollButton.style.display = "block";
+  p1_dice.classList.add("active");
+  p2_dice.classList.remove("active");
 });
